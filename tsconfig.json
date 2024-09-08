@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "strict": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "types": [
+      "@types/node",
+    ],
+  },
+  "include": [
+    "src/**/*",
+    ".eslintrc.cjs",
+    ".prettierrc.cjs",
+  ]
+}
