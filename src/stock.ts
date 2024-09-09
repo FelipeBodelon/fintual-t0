@@ -25,8 +25,7 @@ class Stock {
         this.priceCache.set(date.toISOString(), price);
       });
 
-      const price = await fetchedPrice;
-      return price;
+      return await fetchedPrice;
     }
   }
 }

@@ -12,9 +12,7 @@ class Portfolio {
   async valueAtTime(date: Date) {
     const prices = await Promise.all(this.stocks.map((stock) => stock.price(date)));
 
-    const totalValue = prices.reduce((sum, price) => sum + price, 0);
-
-    return totalValue;
+    return prices.reduce((sum, price) => sum + price, 0);
   }
 
   async valueDelta(startDate: Date, endDate: Date) {
@@ -27,8 +25,7 @@ class Portfolio {
   async profit(startDate: Date, endDate: Date): Promise<number> {
     const [startValue, endValue] = await this.valueDelta(startDate, endDate);
 
-    const profit = endValue - startValue;
-    return profit;
+    return endValue - startValue;
   }
 
   async annualizedProfit(startDate: Date, endDate: Date): Promise<number> {
@@ -49,15 +46,14 @@ class Portfolio {
     const annualizedReturn = await this.annualizedProfit(startDate, endDate);
 
     console.log('-'.repeat(20));
+    console.log('Portfolio', this.name);
     console.log(
-      'Portfolio',
-      this.name,
-      startDate.toLocaleDateString(),
-      '-',
-      endDate.toLocaleDateString(),
+      `From ${startDate.toLocaleDateString()} updated to ${endDate.toLocaleDateString()}`,
     );
+
+    console.log('Balance:', (await this.valueAtTime(endDate)).toFixed(2));
     console.log('Profit:', profit.toFixed(2));
-    console.log('Annualized Return:', `${(annualizedReturn * 100).toFixed(2)}%`);
+    console.log('Annualized return:', `${(annualizedReturn * 100).toFixed(2)}%`);
   }
 }
 
